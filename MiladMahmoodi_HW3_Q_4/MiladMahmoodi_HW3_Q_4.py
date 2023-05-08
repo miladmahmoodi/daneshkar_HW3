@@ -80,7 +80,7 @@ def main():
     print(
         f'Total elapsed seconds: {result[0]}',
         f'Happy birthday in advance... {result[1]}',
-        f'Hijri: {result[2]}',
+        f'Hijri: {result[2][0]}/{result[2][1]}/{result[2][2]}',
         sep='\n',
     )
     playsound('clap.mp3')
