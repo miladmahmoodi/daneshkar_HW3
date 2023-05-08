@@ -23,7 +23,7 @@ def apply_discount(price: int, discount: float = 0.0) -> int:
     assert doesn't work because it has a syntax error.
     The code is modified by removing the desired text from inside the parenthesis.
     assert are not a good way to validate data and are only used to debug and monitor possible errors, because by
-    running this file with the command -O in terminal, all assert are ignored and we have no ability to validate data.
+    running this file with the command '-O' in terminal, all assert are ignored and we have no ability to validate data.
     As a result, assert is not suitable for data validation.
     To avoid this problem and to validate the data, we can use conditional commands.
     Pay attention to the following code:
@@ -36,7 +36,7 @@ def apply_discount(price: int, discount: float = 0.0) -> int:
 
     # Data validation
     if not 0 < final_price <= price:
-        raise Exception('some error.')
+        raise ValueError('some error.')
 
     return final_price
 

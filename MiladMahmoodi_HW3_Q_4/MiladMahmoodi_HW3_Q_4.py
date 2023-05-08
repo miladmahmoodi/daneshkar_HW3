@@ -1,10 +1,15 @@
 #! /usr/bin/python3
 """
-This is
+This module takes the date and time of birth in Gregorian language and calculates the total number of seconds that have
+passed since the date of birth in terms of minutes and seconds, and finally calculates the number of days and minutes
+remaining until the next birthday celebration.
+with a clap sound.
 """
 
 import datetime
 import jdatetime
+
+from playsound import playsound
 
 
 def happy_birthday(
@@ -15,7 +20,7 @@ def happy_birthday(
         minute: int = 0,
         second: int = 0,
 ):
-    datetime_now = datetime.datetime.today()
+    datetime_now = datetime.datetime.now()
 
     birth_date = datetime.datetime(
         year,
@@ -35,11 +40,17 @@ def happy_birthday(
         datetime_now.year,
         month,
         day,
+        hour,
+        minute,
+        second,
     )
     next_year_bd = datetime.datetime(
         datetime_now.year + 1,
         month,
         day,
+        hour,
+        minute,
+        second,
     )
 
     next_birthday = (this_year_bd if this_year_bd > datetime_now else next_year_bd) - datetime_now
@@ -62,17 +73,17 @@ def main():
         5,
         12,
         10,
-        0,
+        10,
         0,
     )
-    # return result
+
     print(
         f'Total elapsed seconds: {result[0]}',
         f'Happy birthday in advance... {result[1]}',
         f'Hijri: {result[2]}',
         sep='\n',
     )
-# Happy birthday in advance
+    playsound('clap.mp3')
 
 
 if __name__ == '__main__':

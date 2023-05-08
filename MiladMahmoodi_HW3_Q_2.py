@@ -38,7 +38,8 @@ def eafp(number_1: int | float, number_2: int | float) -> float:
         raise err
     except OverflowError as err:
         raise err
-
+    except Exception as err:
+        raise err
 
 
 def main():

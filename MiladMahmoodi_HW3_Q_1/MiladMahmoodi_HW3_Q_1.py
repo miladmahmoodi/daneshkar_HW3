@@ -13,7 +13,7 @@ def replacement(lines: list[str]) -> list[str]:
     """
 
     # Numbers of used in file.
-    TRANSLATE_DICT = {
+    REPLACE_DICT = {
         'one': '1',
         'two': '2',
         'three': '3',
@@ -33,21 +33,22 @@ def replacement(lines: list[str]) -> list[str]:
         'seventeen': '17',
         'eighteen': '18',
         'nineteen': '19',
+        'twenty': '20',
     }
 
     for line in lines:
         # Getting spelling number in start each line.
-        char = line.split()
+        spell = line.split(' ')[0]
         # Checking that it is in the TRANSLATE_DICT.
-        if number := TRANSLATE_DICT.get(char):
+        if spell in REPLACE_DICT:
             # Getting index of member.
             i = lines.index(line)
             # Replacing spelling number with it`s number.
             lines[i] = line.replace(
-                char,
-                number,
+                spell,
+                REPLACE_DICT[spell],
+                1,
             )
-
     return lines
 
 
