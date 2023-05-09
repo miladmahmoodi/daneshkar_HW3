@@ -2,6 +2,7 @@
 """
 This module get a file contain of 'The Zen of Python' and in start lines replace number with spelling number.
 """
+import time
 import typing
 from os.path import isfile
 
@@ -12,8 +13,10 @@ def line_generator(file: str) -> typing.Generator:
     :param file: txt file.
     :return: Generator.
     """
-    for line in open(file, 'r'):
-        yield line
+
+    with open(file, 'r') as f:
+        for line in f:
+            yield line
 
 
 def line_replacement_generator(file: str) -> typing.Generator:
