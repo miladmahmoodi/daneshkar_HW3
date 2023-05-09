@@ -52,15 +52,14 @@ def line_replacement_generator(file: str) -> typing.Generator:
     line_gen = line_generator(file)
 
     for line in line_gen:
-        spell = line.split(' ')[0]
-        # Checking that it is in the TRANSLATE_DICT.
-        if spell in REPLACE_DICT:
-            # Replacing spelling number with it`s number.
-            line = line.replace(
-                spell,
-                REPLACE_DICT[spell],
-                1,
-            )
+        for key, value in REPLACE_DICT.items():
+            # Finding spelling number.
+            if key + ' )' in line or ' ' + key + ' ' in line:
+                # Replacing spelling number with it`s number.
+                line = line.replace(
+                    key,
+                    value
+                )
         yield line
 
 
