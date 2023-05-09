@@ -2,14 +2,25 @@
 """
 This module get a file contain of 'The Zen of Python' and in start lines replace number with spelling number.
 """
+import typing
 from os.path import isfile
 
 
-def replacement(lines: list[str]) -> list[str]:
+def line_generator(file: str) -> typing.Generator:
     """
-    This function replaces the spelling number inside the text with its number.
-    :param lines: List of string values.
-    :return: List of string values.
+    This generator yield the input file line by line.
+    :param file: txt file.
+    :return: Generator.
+    """
+    for line in open(file, 'r'):
+        yield line
+
+
+def line_replacement_generator(file: str) -> typing.Generator:
+    """
+    This generator replaces the spelling of the number at the beginning of the line with its number.
+    :param file: txt file.
+    :return: Generator.
     """
 
     # Numbers of used in file.
@@ -36,45 +47,40 @@ def replacement(lines: list[str]) -> list[str]:
         'twenty': '20',
     }
 
-    for line in lines:
-        # Getting spelling number in start each line.
+    line_gen = line_generator(file)
+
+    for line in line_gen:
         spell = line.split(' ')[0]
         # Checking that it is in the TRANSLATE_DICT.
         if spell in REPLACE_DICT:
-            # Getting index of member.
-            i = lines.index(line)
             # Replacing spelling number with it`s number.
-            lines[i] = line.replace(
+            line = line.replace(
                 spell,
                 REPLACE_DICT[spell],
                 1,
             )
-    return lines
+        yield line
 
 
 def zen_of_python(file: str, new_file_name: str = 'zen.txt') -> str:
     """
     The Zen of Python, by Tim Peters
-
     :param file: txt file
     :param new_file_name: New txt file name to save changes.
-    :return: Prompt
+    :return: Prompt.
     """
 
     # Checking if the file is exists.
     if not isfile(file):
         raise FileNotFoundError(f"No such file: '{file}'")
 
-    # Opening the file then reading all lines.
-    with open(file, 'r') as file:
-        lines = file.readlines()
-
-    # Use the convertor function for replacing spelling number with it`s number.
-    lines = replacement(lines)
+    # Use the replacement generator for replacing spelling number with it`s number.
+    replacement_lines = line_replacement_generator(file)
 
     # Opening the file then writing all lines on it.
     with open(new_file_name, 'w') as new_file:
-        new_file.writelines(lines)
+        for line in replacement_lines:
+            new_file.write(line)
 
     return f"End process...\nFile '{new_file_name}' created successfully."
 
@@ -83,6 +89,7 @@ def main():
     """
     This function is written to execute and use this module`s functions in itself.
     """
+
     return zen_of_python(
         'Zen.txt',
         'zen.txt'
@@ -91,4 +98,3 @@ def main():
 
 if __name__ == '__main__':
     print(main())
-
