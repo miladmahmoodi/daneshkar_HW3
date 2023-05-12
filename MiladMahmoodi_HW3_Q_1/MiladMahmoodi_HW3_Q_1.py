@@ -6,7 +6,7 @@ import typing
 from os.path import isfile
 
 
-def line_generator(file: str) -> typing.Generator:
+def line_generator(file: str) -> typing.Generator[str]:
     """
     This generator yield the input file line by line.
     :param file: txt file.
@@ -93,7 +93,7 @@ def main():
 
     return zen_of_python(
         'Zen.txt',
-        'zen.txt'
+        'milad.txt'
     )
 
 
