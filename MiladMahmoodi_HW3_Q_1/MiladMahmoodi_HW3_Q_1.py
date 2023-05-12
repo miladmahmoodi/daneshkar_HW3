@@ -18,7 +18,7 @@ def line_generator(file: str) -> typing.Generator[str]:
             yield line
 
 
-def line_replacement_generator(file: str) -> typing.Generator:
+def line_replacement_generator(file: str) -> typing.Generator[str]:
     """
     This generator replaces the spelling of the number at the beginning of the line with its number.
     :param file: txt file.
